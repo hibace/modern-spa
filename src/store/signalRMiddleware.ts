@@ -1,42 +1,53 @@
-import type { Middleware, Dispatch, AnyAction } from '@reduxjs/toolkit'
+import type { Middleware } from '@reduxjs/toolkit'
 import { HubConnectionBuilder, HubConnection } from '@microsoft/signalr'
 import type { NotificationDetailDto, RegisterClientRequest } from '@/types/notification.types'
-import { useNotificationStore } from '@/store/notificationSlice'
+import { addNotification } from './notificationSlice'
+import { config } from '@/config'
 
 let connection: HubConnection | null = null
 
 export const createSignalRMiddleware =
   (registerRequest: RegisterClientRequest): Middleware =>
-  () =>
-  (next: Dispatch<AnyAction>) =>
-  (action: AnyAction) => {
+  (store) =>
+  (next) =>
+  (action) => {
     if (!connection) {
       connection = new HubConnectionBuilder()
-        .withUrl('/hubs/notification')
+        .withUrl(config.signalR.hubUrl)
         .withAutomaticReconnect()
         .build()
 
       connection.on('ReceiveNotificationAsync', (notification: NotificationDetailDto) => {
-        useNotificationStore.getState().addNotification({
-          id: notification.id,
-          type: notification.typeCode,
-          message: notification.data || '',
-        })
+        console.log(notification)
+        store.dispatch(
+          addNotification({
+            type: notification.typeCode,
+            message: notification.data ?? '',
+          }),
+        )
       })
 
       connection
         .start()
         .then(() => {
-          connection?.invoke('RegisterClientAsync', registerRequest)
+          return connection?.invoke('RegisterClientAsync', registerRequest)
         })
-        .catch(console.error)
+        .catch((error) => {
+          console.error('SignalR connection error:', error)
+        })
     }
+
     return next(action)
   }
 
-export function stopSignalR() {
+export const stopSignalR = async () => {
   if (connection) {
-    connection.stop()
-    connection = null
+    try {
+      await connection.stop()
+    } catch (err) {
+      console.error('Error stopping SignalR connection:', err)
+    } finally {
+      connection = null
+    }
   }
 }

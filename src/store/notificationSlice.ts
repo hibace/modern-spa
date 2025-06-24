@@ -1,18 +1,30 @@
-import { create } from 'zustand'
+import { createSlice } from '@reduxjs/toolkit'
+import type { PayloadAction } from '@reduxjs/toolkit'
 import type { Notification } from '@/types/notification.types'
 
 interface NotificationState {
   notifications: Notification[]
-  addNotification: (notification: Notification) => void
-  removeNotification: (id: string) => void
-  clearNotifications: () => void
 }
 
-export const useNotificationStore = create<NotificationState>((set) => ({
+const initialState: NotificationState = {
   notifications: [],
-  addNotification: (notification) =>
-    set((state) => ({ notifications: [notification, ...state.notifications] })),
-  removeNotification: (id) =>
-    set((state) => ({ notifications: state.notifications.filter((n) => n.id !== id) })),
-  clearNotifications: () => set({ notifications: [] }),
-}))
+}
+
+const notificationSlice = createSlice({
+  name: 'notification',
+  initialState,
+  reducers: {
+    addNotification: (state, action: PayloadAction<Notification>) => {
+      state.notifications.unshift(action.payload)
+    },
+    removeNotification: (state, action: PayloadAction<string>) => {
+      state.notifications = state.notifications.filter((n) => n.type !== action.payload)
+    },
+    clearNotifications: (state) => {
+      state.notifications = []
+    },
+  },
+})
+
+export const { addNotification, removeNotification, clearNotifications } = notificationSlice.actions
+export default notificationSlice.reducer
