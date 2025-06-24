@@ -7,9 +7,16 @@ import {
 } from 'react-icons/hi'
 
 interface NotificationIconProps {
+  /** The type of notification to determine which icon to display */
   type: string
 }
 
+/**
+ * NotificationIcon component that renders different icons based on notification type
+ * @param {NotificationIconProps} props - Component props
+ * @param {string} props.type - The notification type (info, success, warning, error)
+ * @returns {JSX.Element} The appropriate icon component
+ */
 export const NotificationIcon: React.FC<NotificationIconProps> = ({ type }) => {
   switch (type) {
     case 'success':

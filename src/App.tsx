@@ -1,10 +1,15 @@
 import { Notification } from '@/components/Notification'
 
+/**
+ * Main application component
+ * Renders the notification system and main application content
+ * @returns {JSX.Element} The main app component
+ */
 function App() {
   return (
     <>
       <Notification />
-      {/* Здесь ваш основной контент приложения */}
+      {/* Main application content goes here */}
     </>
   )
 }

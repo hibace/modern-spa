@@ -6,6 +6,9 @@ import { useEffect } from 'react'
 import { NotificationIcon } from './NotificationIcon'
 import React from 'react'
 
+/**
+ * CSS classes for different notification types
+ */
 const typeStyles: Record<string, string> = {
   info: 'bg-blue-50 text-blue-900 border-blue-200',
   success: 'bg-green-50 text-green-900 border-green-200',
@@ -13,11 +16,16 @@ const typeStyles: Record<string, string> = {
   error: 'bg-red-50 text-red-900 border-red-200',
 }
 
+/**
+ * Notification component that displays a list of notifications
+ * Features auto-removal after 5 seconds and manual clear functionality
+ * @returns {JSX.Element} The notification component
+ */
 export const Notification: React.FC = () => {
   const notifications = useSelector((state: RootState) => state.notification.notifications)
   const dispatch = useDispatch()
 
-  // Автоудаление уведомлений через 5 секунд
+  // Auto-remove notifications after 5 seconds
   useEffect(() => {
     if (notifications.length === 0) return
     const timers = notifications.map((n) =>
@@ -29,12 +37,12 @@ export const Notification: React.FC = () => {
   return (
     <div className="fixed top-4 right-4 z-50 space-y-2 w-96 max-w-full">
       <div className="mb-2 p-2 rounded bg-gradient-to-r from-cyan-400 to-blue-500 text-white font-bold shadow-lg text-center">
-        Tailwind работает!
+        Tailwind is working!
       </div>
       {notifications.length === 0 ? (
         <div className="flex items-center justify-center px-4 py-3 rounded shadow bg-white/80 border border-gray-200 text-gray-500 animate-fade-in">
           <NotificationIcon type="info" />
-          Нет уведомлений
+          No notifications
         </div>
       ) : (
         <>
@@ -42,9 +50,9 @@ export const Notification: React.FC = () => {
             <button
               className="text-xs text-gray-400 hover:text-gray-700 transition-colors"
               onClick={() => dispatch(clearNotifications())}
-              aria-label="Очистить все уведомления"
+              aria-label="Clear all notifications"
             >
-              Очистить все
+              Clear all
             </button>
           </div>
           {notifications.map((n: NotificationType) => (
@@ -60,7 +68,7 @@ export const Notification: React.FC = () => {
               <button
                 className="ml-4 text-lg font-bold hover:opacity-70 focus:outline-none"
                 onClick={() => dispatch(removeNotification(n.type))}
-                aria-label="Закрыть"
+                aria-label="Close"
               >
                 ×
               </button>
