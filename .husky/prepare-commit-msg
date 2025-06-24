@@ -1,0 +1,2 @@
+#!/bin/sh
+node scripts/prefix-commit-msg.cjs "$1" 

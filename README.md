@@ -1,56 +1,52 @@
 # modern-spa
 
-## Стек технологий
+## Technology Stack
 
-- **Vite** — быстрый сборщик и dev-сервер для современных фронтенд-проектов
-- **TypeScript** — типизированное надмножество JavaScript
-- **React** — библиотека для построения пользовательских интерфейсов
-- **Module Federation (DMF)** — микрофронтенды, динамическое подключение модулей
-- **Module Federation Types Plugin (MFTP)** — обмен типами между микрофронтендами
-- **Tailwind CSS** — утилитарный CSS-фреймворк
-- **shadcn/ui** — коллекция UI-компонентов на базе Radix UI и Tailwind CSS
-- **Framer Motion** — анимации для React
-- **Storybook** — изолированная разработка и документация компонентов
-- **Zustand** — легковесное управление состоянием
-- **React Query** — асинхронное управление данными и кэширование
-- **Axios** — HTTP-клиент
-- **SignalR** — real-time коммуникация
-- **i18next** — интернационализация
-- **Vitest** — тестовый раннер для Vite/TypeScript
-- **React Testing Library** — тестирование React-компонентов
-- **MSW (Mock Service Worker)** — мок API для тестирования
-- **ESLint** — линтер для кода
-- **Prettier** — автоформатирование кода
-- **Husky** — git-хуки
-- **lint-staged** — линтинг и форматирование только изменённых файлов
-- **commitlint** — проверка сообщений коммитов
+- **Vite** — Fast build tool and dev server for modern frontend projects
+- **TypeScript** — Typed superset of JavaScript
+- **React** — Library for building user interfaces
+- **Tailwind CSS** — Utility-first CSS framework
+- **shadcn/ui** — Collection of UI components based on Radix UI and Tailwind CSS
+- **Framer Motion** — Animations for React
+- **Storybook** — Isolated component development and documentation
+- **Axios** — HTTP client
+- **SignalR** — Real-time communication
+- **i18next** — Internationalization
+- **Vitest** — Test runner for Vite/TypeScript
+- **React Testing Library** — Testing React components
+- **MSW (Mock Service Worker)** — API mocking for testing
+- **ESLint** — Code linter
+- **Prettier** — Code auto-formatting
+- **Husky** — Git hooks
+- **lint-staged** — Linting and formatting only changed files
+- **commitlint** — Commit message validation
 
-## Быстрый старт
+## Quick Start
 
-1. Установите зависимости:
+1. Install dependencies:
    ```bash
    npm install
    ```
-2. Запустите dev-сервер:
+2. Start dev server:
    ```bash
    npm run dev
    ```
-3. Откройте [http://localhost:5173](http://localhost:5173)
+3. Open [http://localhost:5173](http://localhost:5173)
 
-## Скрипты
+## Scripts
 
-- `dev` — запуск dev-сервера
-- `build` — сборка проекта
-- `preview` — предпросмотр production-сборки
-- `test` — запуск тестов
-- `lint` — запуск линтера
-- `format` — автоформатирование кода
+- `dev` — Start dev server
+- `build` — Build project
+- `preview` — Preview production build
+- `test` — Run tests
+- `lint` — Run linter
+- `format` — Auto-format code
 
-## Структура проекта
+## Project Structure
 
-- `src/` — исходный код приложения
-- `public/` — статические файлы
+- `src/` — Application source code
+- `public/` — Static files
 
-## Лицензия
+## License
 
 MIT
