@@ -1,4 +1,2 @@
 #!/bin/sh
-. "$(dirname "$0")/_/husky.sh"
-
-node scripts/prefix-commit-msg.js "$1" 
+node scripts/prefix-commit-msg.cjs "$1" 
